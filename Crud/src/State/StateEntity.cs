@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Crud.src.City;
+using Microsoft.Extensions.Hosting;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 
@@ -17,7 +19,7 @@ namespace Crud.src.State
         [Required]
         public string Name { get; set; }
 
-        [Required(ErrorMessage = "This field is obrigatory")]
+        [Required]
         [StringLength(2, MinimumLength = 2, ErrorMessage = "The abreviation should have 2 characters")]
         public string Abreviation { get; set; }
 

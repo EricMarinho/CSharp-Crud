@@ -4,16 +4,18 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Crud.src.User.dto
 {
-    public class UserDto
+    public class CreateUserDto
     {
-        public Guid Id { get; set; }
-
-        public DateTime CreatedAt { get; set; }
-
         [EmailAddress]
         public string Email { get; set; }
 
-        [DataType(DataType.Date)]
+        [Required]
+        public string Password { get; set; }
+
+        [Required]
+        public string Name { get; set; }
+
+        [Required]
         public DateTime BirthDate { get; set; }
 
         public UserType PersonType { get; set; }

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Crud.src.City.dto;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Crud.src.City
 {
@@ -42,7 +43,7 @@ namespace Crud.src.City
         }
 
         [HttpPost]
-        public async Task<IActionResult> PostCity([FromBody] CityEntity city)
+        public async Task<IActionResult> PostCity([FromBody] CreateCityDto city)
         {
             try
             {
@@ -56,11 +57,11 @@ namespace Crud.src.City
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutCity([FromBody] CityEntity city)
+        public async Task<IActionResult> PutCity(Guid id, [FromBody] CreateCityDto city)
         {
             try
             {
-                await _cityService.PutCity(city);
+                await _cityService.PutCity(id, city);
                 return Ok(city);
             }
             catch (Exception ex)

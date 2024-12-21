@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Crud.src.State.dto;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Crud.src.State
 {
@@ -42,11 +43,11 @@ namespace Crud.src.State
         }
 
         [HttpPost]
-        public async Task<IActionResult> PostState([FromBody] StateEntity state)
+        public async Task<IActionResult> PostState([FromBody] CreateStateDto stateDto)
         {
             try
             {
-                await _stateService.PostState(state);
+                StateEntity state = await _stateService.PostState(stateDto);
                 return Ok(state);
             }
             catch (Exception ex)
@@ -56,11 +57,11 @@ namespace Crud.src.State
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutState([FromBody] StateEntity state)
+        public async Task<IActionResult> PutState(Guid id, [FromBody] CreateStateDto stateDto)
         {
             try
             {
-                await _stateService.PutState(state);
+                StateEntity state = await _stateService.PutState(id, stateDto);
                 return Ok(state);
             }
             catch (Exception ex)

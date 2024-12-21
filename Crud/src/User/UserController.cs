@@ -1,5 +1,6 @@
 ﻿using Crud.Data;
 using Crud.src.City;
+using Crud.src.User.dto;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Crud.src.User
@@ -18,71 +19,36 @@ namespace Crud.src.User
         [HttpGet]
         public async Task<IActionResult> GetUsers()
         {
-            try
-            {
-                List<UserEntity> result = await _userService.GetUsers();
-                return Ok(result);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            List<UserEntity> result = await _userService.GetUsers();
+            return Ok(result);
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetUser(Guid id)
         {
-            try
-            {
-                UserEntity? result = await _userService.GetUser(id);
-                return Ok(result);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            UserEntity? result = await _userService.GetUser(id);
+            return Ok(result);
         }
 
         [HttpPost]
-        public async Task<IActionResult> PostUser([FromBody] UserEntity user)
+        public async Task<IActionResult> PostUser([FromBody] CreateUserDto user)
         {
-            try
-            {
-                await _userService.PostUser(user);
-                return Ok(user);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            await _userService.PostUser(user);
+            return Ok(user);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutUser([FromBody] UserEntity user)
+        public async Task<IActionResult> PutUser(Guid id, [FromBody] CreateUserDto user)
         {
-            try
-            {
-                await _userService.PutUser(user);
-                return Ok(user);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            await _userService.PutUser(id, user);
+            return Ok(user);
         }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteUser(Guid id)
         {
-            try
-            {
-                await _userService.DeleteUser(id);
-                return Ok();
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            await _userService.DeleteUser(id);
+            return Ok();
         }
     }
 }

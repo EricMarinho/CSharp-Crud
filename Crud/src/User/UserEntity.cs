@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.Text.Json.Serialization;
+using System.ComponentModel.DataAnnotations.Schema;
 using Crud.src.City;
 using Crud.src.User.Enums;
 
@@ -16,8 +16,11 @@ namespace Crud.src.User
         [Key]
         public Guid Id { get; set; }
 
-        //Created at
+        [DataType(DataType.Date)]
         public DateTime CreatedAt { get; set; }
+
+        [Required]
+        public string Name { get; set; }
 
         [EmailAddress]
         public string Email { get; set; }
@@ -28,6 +31,7 @@ namespace Crud.src.User
         [DataType(DataType.Date)]
         public DateTime BirthDate { get; set; }
 
+        [Required]
         public UserType PersonType { get; set; }
 
         // Not Required, can be null
