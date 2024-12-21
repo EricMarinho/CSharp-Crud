@@ -1,5 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using Crud.Data;
+using Crud.src.User;
+using Crud.src.City;
+using Crud.src.State;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +14,11 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddScoped<UserService>();
+builder.Services.AddScoped<CityService>();
+builder.Services.AddScoped<StateService>();
+
 
 var app = builder.Build();
 

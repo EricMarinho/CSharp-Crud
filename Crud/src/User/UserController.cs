@@ -1,6 +1,6 @@
 ﻿using Crud.Data;
+using Crud.src.City;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace Crud.src.User
 {
@@ -8,11 +8,11 @@ namespace Crud.src.User
     [Route("api/[controller]")]
     public class UserController : Controller
     {
-        private readonly CrudDbContext _context;
+        private readonly UserService _userService;
 
-        public UserController(CrudDbContext context)
+        public UserController(UserService userService)
         {
-            _context = context;
+            _userService = userService;
         }
 
         [HttpGet]
@@ -20,8 +20,64 @@ namespace Crud.src.User
         {
             try
             {
-                var result = await _context.States.ToListAsync();
+                List<UserEntity> result = await _userService.GetUsers();
                 return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetUser(Guid id)
+        {
+            try
+            {
+                UserEntity? result = await _userService.GetUser(id);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> PostUser([FromBody] UserEntity user)
+        {
+            try
+            {
+                await _userService.PostUser(user);
+                return Ok(user);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutUser([FromBody] UserEntity user)
+        {
+            try
+            {
+                await _userService.PutUser(user);
+                return Ok(user);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteUser(Guid id)
+        {
+            try
+            {
+                await _userService.DeleteUser(id);
+                return Ok();
             }
             catch (Exception ex)
             {

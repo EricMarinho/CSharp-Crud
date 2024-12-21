@@ -1,6 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Crud.Data;
 
 namespace Crud.src.State
 {
@@ -8,11 +6,11 @@ namespace Crud.src.State
     [Route("api/[controller]")]
     public class StatesController : Controller
     {
-        private readonly CrudDbContext _context;
+        private readonly StateService _stateService;
 
-        public StatesController(CrudDbContext context)
+        public StatesController(StateService stateService)
         {
-            _context = context;
+            _stateService = stateService;
         }
 
         [HttpGet]
@@ -20,7 +18,7 @@ namespace Crud.src.State
         {
             try
             {
-                var result = await _context.States.ToListAsync();
+                List<StateEntity> result = await _stateService.GetStates();
                 return Ok(result);
             }
             catch (Exception ex)
@@ -30,11 +28,11 @@ namespace Crud.src.State
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetStates(Guid id)
+        public async Task<IActionResult> GetState(Guid id)
         {
             try
             {
-                var result = await _context.States.FindAsync(id);
+                StateEntity? result = await _stateService.GetState(id);
                 return Ok(result);
             }
             catch (Exception ex)
@@ -48,8 +46,7 @@ namespace Crud.src.State
         {
             try
             {
-                _context.States.Add(state);
-                await _context.SaveChangesAsync();
+                await _stateService.PostState(state);
                 return Ok(state);
             }
             catch (Exception ex)
@@ -58,13 +55,12 @@ namespace Crud.src.State
             }
         }
 
-        [HttpPut]
+        [HttpPut("{id}")]
         public async Task<IActionResult> PutState([FromBody] StateEntity state)
         {
             try
             {
-                _context.States.Update(state);
-                await _context.SaveChangesAsync();
+                await _stateService.PutState(state);
                 return Ok(state);
             }
             catch (Exception ex)
@@ -78,13 +74,7 @@ namespace Crud.src.State
         {
             try
             {
-                var state = await _context.States.FindAsync(id);
-                if (state == null)
-                {
-                    return NotFound();
-                }
-                _context.States.Remove(state);
-                await _context.SaveChangesAsync();
+                await _stateService.DeleteState(id);
                 return Ok();
             }
             catch (Exception ex)

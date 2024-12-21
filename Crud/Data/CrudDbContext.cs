@@ -12,7 +12,7 @@ namespace Crud.Data
         }
         public DbSet<StateEntity> States { get; set; }
         public DbSet<CityEntity> Cities { get; set; }
-        public DbSet<UserEntity> People { get; set; }
+        public DbSet<UserEntity> Users { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<StateEntity>().ToTable("State");
