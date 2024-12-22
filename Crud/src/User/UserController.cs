@@ -1,6 +1,4 @@
-﻿using Crud.Data;
-using Crud.src.City;
-using Crud.src.User.dto;
+﻿using Crud.src.User.dto;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Crud.src.User

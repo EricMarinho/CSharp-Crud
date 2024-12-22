@@ -17,7 +17,7 @@ namespace Crud.Data
         {
             modelBuilder.Entity<StateEntity>().ToTable("State");
             modelBuilder.Entity<CityEntity>().ToTable("City");
-            modelBuilder.Entity<UserEntity>().ToTable("Person");
+            modelBuilder.Entity<UserEntity>().ToTable("Users");
         }
     }
 }

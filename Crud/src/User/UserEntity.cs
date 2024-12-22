@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using Crud.src.City;
 using Crud.src.User.Enums;
 
@@ -10,14 +9,13 @@ namespace Crud.src.User
         public UserEntity()
         {
             Id = Guid.NewGuid();
-            CreatedAt = DateTime.Now;
+            CreatedAt = DateTime.Now.ToString();
         }
 
         [Key]
         public Guid Id { get; set; }
 
-        [DataType(DataType.Date)]
-        public DateTime CreatedAt { get; set; }
+        public string CreatedAt { get; set; }
 
         [Required]
         public string Name { get; set; }
@@ -28,14 +26,13 @@ namespace Crud.src.User
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
-        [DataType(DataType.Date)]
-        public DateTime BirthDate { get; set; }
+        public string BirthDate { get; set; }
 
         [Required]
         public UserType PersonType { get; set; }
 
-        // Not Required, can be null
-        public Guid? CityId { get; set; }
+        [Required]
+        public Guid CityId { get; set; }
 
         // Foreign Key (Relation)
         public CityEntity City { get; set; }

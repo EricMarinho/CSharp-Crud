@@ -46,25 +46,27 @@ namespace Crud.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Person",
+                name: "Users",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    CreatedAt = table.Column<string>(type: "text", nullable: false),
+                    Name = table.Column<string>(type: "text", nullable: false),
                     Email = table.Column<string>(type: "text", nullable: false),
                     Password = table.Column<string>(type: "text", nullable: false),
-                    BirthDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    BirthDate = table.Column<string>(type: "text", nullable: false),
                     PersonType = table.Column<int>(type: "integer", nullable: false),
-                    CityId = table.Column<Guid>(type: "uuid", nullable: true)
+                    CityId = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Person", x => x.Id);
+                    table.PrimaryKey("PK_Users", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Person_City_CityId",
+                        name: "FK_Users_City_CityId",
                         column: x => x.CityId,
                         principalTable: "City",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -73,8 +75,8 @@ namespace Crud.Migrations
                 column: "StateId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Person_CityId",
-                table: "Person",
+                name: "IX_Users_CityId",
+                table: "Users",
                 column: "CityId");
         }
 
@@ -82,7 +84,7 @@ namespace Crud.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Person");
+                name: "Users");
 
             migrationBuilder.DropTable(
                 name: "City");

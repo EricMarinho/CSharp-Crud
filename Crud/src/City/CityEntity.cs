@@ -1,7 +1,5 @@
 ﻿using Crud.src.State;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Text.Json.Serialization;
 
 namespace Crud.src.City
 {

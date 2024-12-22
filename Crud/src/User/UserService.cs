@@ -25,33 +25,33 @@ namespace Crud.src.User
             return result;
         }
 
-        public async Task PostUser(CreateUserDto user)
+        public async Task PostUser(CreateUserDto userDto)
         {
             UserEntity userEntity = new UserEntity();
 
-            userEntity.Name = user.Name;
-            userEntity.Email = user.Email;
-            userEntity.Password = user.Password;
-            //userEntity.BirthDate = user.BirthDate;
-            userEntity.PersonType = user.PersonType;
-            userEntity.CityId = user.CityId;
+            userEntity.Name = userDto.Name;
+            userEntity.Email = userDto.Email;
+            userEntity.Password = userDto.Password;
+            userEntity.BirthDate = userDto.BirthDate;
+            userEntity.PersonType = userDto.PersonType;
+            userEntity.CityId = userDto.CityId;
 
             _context.Users.Add(userEntity);
             await _context.SaveChangesAsync();
         }
 
-        public async Task PutUser(Guid id, CreateUserDto user)
+        public async Task PutUser(Guid id, CreateUserDto userDto)
         {
             UserEntity? userEntity = await _context.Users.FindAsync(id);
 
             if(userEntity == null) throw new Exception("User not found");
 
-            userEntity.Name = user.Name;
-            userEntity.Email = user.Email;
-            userEntity.Password = user.Password;
-            userEntity.BirthDate = user.BirthDate;
-            userEntity.PersonType = user.PersonType;
-            userEntity.CityId = user.CityId;
+            userEntity.Name = userDto.Name;
+            userEntity.Email = userDto.Email;
+            userEntity.Password = userDto.Password;
+            userEntity.BirthDate = userDto.BirthDate;
+            userEntity.PersonType = userDto.PersonType;
+            userEntity.CityId = userDto.CityId;
 
             _context.Users.Update(userEntity);
             await _context.SaveChangesAsync();

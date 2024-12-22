@@ -1,5 +1,4 @@
 ﻿using Crud.src.User.Enums;
-using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace Crud.src.User.dto
@@ -15,11 +14,11 @@ namespace Crud.src.User.dto
         [Required]
         public string Name { get; set; }
 
-        [Required]
-        public DateTime BirthDate { get; set; }
+        public string BirthDate { get; set; }
 
         public UserType PersonType { get; set; }
 
-        public Guid? CityId { get; set; }
+        [Required]
+        public Guid CityId { get; set; }
     }
 }

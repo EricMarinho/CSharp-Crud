@@ -74,14 +74,16 @@ namespace Crud.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<DateTime>("BirthDate")
-                        .HasColumnType("timestamp with time zone");
+                    b.Property<string>("BirthDate")
+                        .IsRequired()
+                        .HasColumnType("text");
 
-                    b.Property<Guid?>("CityId")
+                    b.Property<Guid>("CityId")
                         .HasColumnType("uuid");
 
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone");
+                    b.Property<string>("CreatedAt")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -102,7 +104,7 @@ namespace Crud.Migrations
 
                     b.HasIndex("CityId");
 
-                    b.ToTable("Person", (string)null);
+                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("Crud.src.City.CityEntity", b =>
@@ -120,7 +122,9 @@ namespace Crud.Migrations
                 {
                     b.HasOne("Crud.src.City.CityEntity", "City")
                         .WithMany()
-                        .HasForeignKey("CityId");
+                        .HasForeignKey("CityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("City");
                 });
