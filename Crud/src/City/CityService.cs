@@ -44,6 +44,7 @@ namespace Crud.src.City
 
             city.Name = cityDto.Name;
             city.StateId = cityDto.StateId;
+            city.UpdatedAt = DateTime.Now.ToString();
 
             _context.Cities.Update(city);
             await _context.SaveChangesAsync();

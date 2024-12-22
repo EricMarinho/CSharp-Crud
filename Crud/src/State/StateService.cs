@@ -48,7 +48,7 @@ namespace Crud.src.State
             state.Name = stateDto.Name;
             state.Abreviation = stateDto.Abreviation;
             state.Area = stateDto.Area;
-
+            state.UpdatedAt = DateTime.Now.ToString();
 
             _context.States.Update(state);
             await _context.SaveChangesAsync();

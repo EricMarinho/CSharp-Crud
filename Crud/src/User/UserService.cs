@@ -52,6 +52,7 @@ namespace Crud.src.User
             userEntity.BirthDate = userDto.BirthDate;
             userEntity.PersonType = userDto.PersonType;
             userEntity.CityId = userDto.CityId;
+            userEntity.UpdatedAt = DateTime.Now.ToString();
 
             _context.Users.Update(userEntity);
             await _context.SaveChangesAsync();
