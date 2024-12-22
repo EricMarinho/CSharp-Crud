@@ -1,22 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Crud.src.City;
+using Crud.src.Core;
 using Crud.src.User.Enums;
 
 namespace Crud.src.User
 {
-    public class UserEntity
+    public class UserEntity: CoreEntity
     {
-        public UserEntity()
-        {
-            Id = Guid.NewGuid();
-            CreatedAt = DateTime.Now.ToString();
-        }
-
-        [Key]
-        public Guid Id { get; set; }
-
-        public string CreatedAt { get; set; }
-
         [Required]
         public string Name { get; set; }
 

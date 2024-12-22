@@ -1,21 +1,11 @@
-﻿using Crud.src.City;
-using Microsoft.Extensions.Hosting;
+﻿using Crud.src.Core;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text.Json.Serialization;
 
 namespace Crud.src.State
 {
-    public class StateEntity
+    public class StateEntity : CoreEntity
     {
-        public StateEntity()
-        {
-            Id = Guid.NewGuid();
-        }
-
-        [Key]
-        public Guid Id { get; set; }
-
         [Required]
         public string Name { get; set; }
 
